@@ -15,7 +15,4 @@ test:
 
 production:
   <<: *default
-  database: wainavi_production
-  username: wainavi
-  host: <%= ENV["WAINAVI_DATABASE_HOST"] %>
-  password: <%= ENV["WAINAVI_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
