@@ -1,15 +1,85 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
  *= require_self
+ *= require_tree .
  */
+body {
+  background-color: rgb(246, 236, 188)5;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.hero {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.hero-image {
+  width: 30%;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.top-page-header {
+  width: 100vw;
+  height: 80px;
+  color: rgb(125, 248, 227);
+  background-color: rgb(244, 231, 175)5;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.navigation {
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 1vh 0;
+}
+
+.lists-right {
+  display: flex;
+  min-width: 200px;
+  list-style: none;
+}
+
+.lists-right li {
+  list-style: none;
+}
+
+.login {
+  text-decoration: none;
+  line-height: 32px;
+  margin-right: 3vw;
+  color: #81e9eb;
+}
+
+.sign-up {
+  text-decoration: none;
+  color: #e86384;
+  font-weight: bold;
+}
+
+.wineries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+
+.winery-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 12px;
+  background-color: #fffef9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}

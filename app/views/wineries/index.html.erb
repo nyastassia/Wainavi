@@ -1,0 +1,30 @@
+<main>
+  <section class="hero">
+   <%= image_tag("winery_index_page_image.avif", alt: "Winery landscape", class: "hero-image") %>
+   <%= image_tag("winery_index_kampai.avif", alt: "Winery landscape", class: "hero-image") %>
+   <%= image_tag("winery_index_vines.avif", alt: "Winery landscape", class: "hero-image") %>
+  </section>
+
+  <section class="filters">
+    <h2>ワイナリーを見つける</h2>
+    <div class="filter-grid">
+      <select name="grape_variety"><option>ブドウの品種</option></select>
+      <select name="wine_style"><option>ワインの種類</option></select>
+      <select name="awards"><option>受賞歴</option></select>
+      <select name="experience"><option>体験></select>
+      <select name="dining"><option>食事</option></select>
+      <select name="area"><option>地域</option></select>
+      <select name="tasting"><option>試飲</option></select>
+      <select name="winery_type"><option>ワイナリーのタイプ</option></select>
+    </div>
+  </section>
+
+  <section class="wineries-grid">
+    <article class="winery-card">
+      <img src="sample.jpg" alt="Winery photo" />
+      <h3>Winery Name</h3>
+      <p>Short description of the winery...</p>
+    </article>
+    <!-- можно будет выводить с помощью итерации -->
+  </section>
+</main>
