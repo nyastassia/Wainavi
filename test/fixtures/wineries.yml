@@ -1,0 +1,39 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  open_days_and_time: MyText
+  wine_region_id: 1
+  tasting_id: 1
+  winery_type_id: 1
+  grape_variety_id: 1
+  wine_style_id: 1
+  awards_id: 1
+  experience_id: 1
+  dining_id: 1
+  facilities: MyString
+  description: MyText
+  address: MyString
+  website: MyString
+  phone: MyString
+  map: MyString
+  rating: 1.5
+
+two:
+  title: MyString
+  open_days_and_time: MyText
+  wine_region_id: 1
+  tasting_id: 1
+  winery_type_id: 1
+  grape_variety_id: 1
+  wine_style_id: 1
+  awards_id: 1
+  experience_id: 1
+  dining_id: 1
+  facilities: MyString
+  description: MyText
+  address: MyString
+  website: MyString
+  phone: MyString
+  map: MyString
+  rating: 1.5

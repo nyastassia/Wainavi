@@ -65,4 +65,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-# gem "tailwindcss-rails"
+
+gem 'active_hash'
+>>>>>>> feature/winery-database-search
