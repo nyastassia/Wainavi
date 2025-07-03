@@ -25,4 +25,7 @@ class Winery < ApplicationRecord
   # Associations for dining
   has_many :dining_wineries
   has_many :dinings, through: :dining_wineries
+  
+  # Active Storage for multiple images
+  has_many_attached :images
 end
