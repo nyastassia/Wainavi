@@ -67,4 +67,4 @@ group :test do
 end
 
 gem 'active_hash'
->>>>>>> feature/winery-database-search
+
