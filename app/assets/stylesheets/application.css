@@ -2,55 +2,73 @@
  *= require_self
  *= require_tree .
  */
+
+/* General page styles */
 body {
-  background-color: rgb(246, 236, 188)5;
-  font-family: sans-serif;
+  width: 100%;
+  background-color: rgb(240, 221, 231) !important;
+  font-family: 'Didot', 'Playfair Display', serif;
+  color: #111;
   margin: 0;
   padding: 0;
+  line-height: 1.6;
 }
 
+/* Fonts for English text */
 .eng-font {
   font-family: 'Playfair Display', serif;
 }
 
+/* Hero section */
 .hero {
   display: flex;
-  flex-direction: row;
-
+  justify-content: center;
+  gap: 24px;
+  margin: 40px 0;
 }
 
 .hero-image {
   width: 30%;
-  height: auto;
-  display: block;
-  margin: 0 auto 20px auto;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0px;
+  opacity: 0.95;
+  transition: transform 0.3s ease;
 }
 
+.hero-image:hover {
+  transform: scale(1.02);
+}
+
+/* Header */
 .top-page-header {
-  width: 100vw;
-  height: 80px;
-  color: rgb(125, 248, 227);
-  background-color: rgb(244, 231, 175)5;
+  width: 100%;
+  margin: auto;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  font-family: 'Didot', serif;
+  font-size: 20px;
 }
 
+.top-page-header h1 {
+  font-weight: 400;
+  /* или 300, если шрифт поддерживает */
+}
+
+/* Navigation */
 .navigation {
-  font-size: 18px;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 1vh 0;
+  gap: 20px;
+  font-size: 16px;
 }
 
 .lists-right {
   display: flex;
-  min-width: 200px;
+  gap: 24px;
+  margin: 0;
+  padding: 0 3cm 0 0;
   list-style: none;
 }
 
@@ -60,30 +78,144 @@ body {
 
 .login {
   text-decoration: none;
-  line-height: 32px;
-  margin-right: 3vw;
-  color: #81e9eb;
+  color: #333;
+  font-weight: 500;
 }
 
 .sign-up {
   text-decoration: none;
-  color: #e86384;
+  color: #000;
   font-weight: bold;
 }
 
-.wineries-grid {
+.filters-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filters-heading h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.filter-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  /* 2 ряда по 4 фильтра */
+  gap: 24px 32px;
+  /* вертикаль и горизонталь */
+  max-width: 900px;
+  margin: 0 auto;
   padding: 20px;
 }
 
+/* Uniform style for all <select> dropdowns */
+.filters select,
+.filter-grid select {
+  width: 180px;
+  padding: 8px 10px;
+  border: 2px solid #000;
+  border-radius: 0;
+  font-size: 14px;
+  box-sizing: border-box;
+  appearance: none;
+  background-color: white;
+}
 
-.winery-card {
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 12px;
-  background-color: #fffef9;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+/* Container for buttons */
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Base style for both buttons */
+.search-button,
+.reset-button {
+  width: 80px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 0;
   text-align: center;
+  text-decoration: none;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* "検索" — black button */
+.search-button {
+  background-color: black;
+  color: white;
+}
+
+/* "リセット" — white button */
+.reset-button {
+  background-color: white;
+  color: black;
+}
+
+
+/* Grid layout for winery cards */
+.wineries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
+
+/* Individual winery card */
+.winery-card {
+  background-color: #fff;
+  border: none;
+  padding: 16px;
+  border-radius: 0px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: 'Georgia', serif;
+  text-align: left;
+  transition: box-shadow 0.2s ease;
+}
+
+.winery-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.winery-card h2 a {
+  text-decoration: none;
+  color: black;
+}
+
+.winery-card h2 a:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.winery-card h2 a:visited {
+  color: #800020;
+  /* глубокий винный цвет, можно заменить на другой при желании */
+}
+
+/* Pagination section */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding-bottom: 40px;
+}
+
+.pagination a,
+.pagination span {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #111;
+}
+
+.pagination .current {
+  background-color: #111;
+  color: white;
+  border-color: #111;
 }

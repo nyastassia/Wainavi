@@ -1,10 +1,12 @@
 class Winery < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
+  validates :title, presence: true
+
   # ActiveHash
-  belongs_to :wine_region
-  belongs_to :winery_type
-  belongs_to :tasting_type
+  belongs_to_active_hash :wine_region
+  belongs_to_active_hash :winery_type
+  belongs_to_active_hash :tasting_type, class_name: "TastingType", foreign_key: "tasting_id"
 
   # Associations for grape varieties
   has_many :grape_variety_wineries
@@ -25,4 +27,7 @@ class Winery < ApplicationRecord
   # Associations for dining
   has_many :dining_wineries
   has_many :dinings, through: :dining_wineries
+
+  # Active Storage for multiple images
+  has_many_attached :images
 end
