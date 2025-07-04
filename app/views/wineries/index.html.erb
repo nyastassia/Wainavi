@@ -3,28 +3,116 @@
    <%= image_tag("winery_index_page_image.avif", alt: "Winery landscape", class: "hero-image") %>
    <%= image_tag("winery_index_kampai.avif", alt: "Winery landscape", class: "hero-image") %>
    <%= image_tag("winery_index_vines.avif", alt: "Winery landscape", class: "hero-image") %>
+  
   </section>
 
   <section class="filters">
-    <h2>ワイナリーを見つける</h2>
+    <div class="filters-heading">
+  <h2>ワイナリーを見つける</h2>
+</div>
+     <%= form_with url: wineries_path, method: :get, local: true do |form| %>
     <div class="filter-grid">
-      <select name="grape_variety"><option>ブドウの品種</option></select>
-      <select name="wine_style"><option>ワインの種類</option></select>
-      <select name="awards"><option>受賞歴</option></select>
-      <select name="experience"><option>体験</select>
-      <select name="dining"><option>食事</option></select>
-      <select name="area"><option>地域</option></select>
-      <select name="tasting"><option>試飲</option></select>
-      <select name="winery_type"><option>ワイナリーのタイプ</option></select>
-    </div>
-  </section>
+      <%= form.collection_select :wine_region, WineRegion.all, :id, :name,
+        { include_blank: "地域" }, 
+        { 
+          selected: params[:wine_region],
+          class: ("active-filter" if params[:wine_region].present?)
+           } %>
 
-  <section class="wineries-grid">
+      <%= form.collection_select :grape_variety, GrapeVariety.all, :id, :name,
+        { include_blank: "ブドウの品種" },
+         { 
+          selected: params[:grape_variety],
+          class: ("active-filter" if params[:grape_variety].present?) 
+          } %>
+
+      <%= form.collection_select :wine_style, WineStyle.all, :id, :name,
+        { include_blank: "ワインの種類" }, 
+        { 
+          selected: params[:wine_style],
+          class: ("active-filter" if params[:wine_style].present?) 
+          } %>
+
+      <%= form.collection_select :winery_type, WineryType.all, :id, :name,
+        { include_blank: "ワイナリーのタイプ" },
+         { 
+          selected: params[:winery_type],
+          class: ("active-filter" if params[:winery_type].present?) 
+          } %>
+
+      <%= form.collection_select :award, Award.all, :id, :name,
+        { include_blank: "受賞歴" }, 
+        {
+          selected: params[:award],
+          class: ("active-filter" if params[:award].present?)  
+          } %>
+
+      <%= form.collection_select :tasting_type, TastingType.all, :id, :name,
+        { include_blank: "試飲" }, 
+        { 
+          selected: params[:tasting_type],
+          class: ("active-filter" if params[:tasting_type].present?) 
+          } %>
+
+      <%= form.collection_select :dining, Dining.all, :id, :name,
+        { include_blank: "食事" }, 
+        { 
+          selected: params[:dining],
+          class: ("active-filter" if params[:dining].present?) 
+          } %>
+
+      <%= form.collection_select :experience, Experience.all, :id, :name,
+        { include_blank: "体験" },
+         { 
+           selected: params[:experience],
+           class: ("active-filter" if params[:experience].present?) 
+           } %>
+    </div>
+<div class="filter-buttons">
+  <%= submit_tag "検索", class: "search-button" %>
+  <%= link_to "リセット", wineries_path, method: :get, class: "reset-button" %>
+</div>
+    <% end %>
+</section>
+
+<section class="wineries-grid">
+  <% @wineries.compact.each do |winery| %>
     <article class="winery-card">
-      <img src="sample.jpg" alt="Winery photo" />
-      <h3>Winery Name</h3>
-      <p>Short description of the winery...</p>
+      <h2>
+        <%= link_to (winery.title.presence || "名称未設定"), winery_path(winery) %>
+      </h2>
+
+      <p><strong>地域:</strong> <%= winery.wine_region&.name || "未設定" %></p>
+
+      <p><strong>ブドウの品種:</strong>
+        <%= winery.grape_varieties.any? ? winery.grape_varieties.map(&:name).join(", ") : "情報なし" %>
+      </p>
+
+      <p><strong>ワインの種類:</strong>
+        <%= winery.wine_styles.any? ? winery.wine_styles.map(&:name).join(", ") : "情報なし" %>
+      </p>
+
+      <p><strong>ワイナリーのタイプ:</strong> <%= winery.winery_type&.name || "未設定" %></p>
+
+      <p><strong>受賞歴:</strong>
+        <%= winery.awards.any? ? winery.awards.map(&:name).join(", ") : "情報なし" %>
+      </p>
+
+      <p><strong>試飲:</strong> <%= winery.tasting_type&.name || "未設定" %></p>
+
+      <p><strong>食事:</strong>
+        <%= winery.dinings.any? ? winery.dinings.map(&:name).join(", ") : "情報なし" %>
+      </p>
+
+      <p><strong>体験:</strong>
+        <%= winery.experiences.any? ? winery.experiences.map(&:name).join(", ") : "情報なし" %>
+      </p>
     </article>
-    <!-- можно будет выводить с помощью итерации -->
-  </section>
+  <% end %>
+</section>
+
+<div class="pagination">
+  <%= paginate @wineries %>
+</div>
+
 </main>
