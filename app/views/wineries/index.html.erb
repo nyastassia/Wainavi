@@ -19,12 +19,14 @@
           class: ("active-filter" if params[:wine_region].present?)
            } %>
 
-      <%= form.collection_select :grape_variety, GrapeVariety.all, :id, :name,
-        { include_blank: "ブドウの品種" },
-         { 
-          selected: params[:grape_variety],
-          class: ("active-filter" if params[:grape_variety].present?) 
-          } %>
+      <%= form.collection_select :grape_variety, 
+      GrapeVariety.all.map { |g| [ "#{g.category}：#{g.name}", g.id ] },
+      :last, :first,
+      { include_blank: "ブドウの品種" },
+      { 
+        selected: params[:grape_variety],
+        class: ("active-filter" if params[:grape_variety].present?) 
+      } %>
 
       <%= form.collection_select :wine_style, WineStyle.all, :id, :name,
         { include_blank: "ワインの種類" }, 

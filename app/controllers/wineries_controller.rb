@@ -15,22 +15,24 @@ class WineriesController < ApplicationController
      @tastings = TastingType.all
      @winery_types = WineryType.all
     
-    # Apply filters only if corresponding params are present
-    # many-to-many filters
-    @wineries = @wineries.joins(:grape_varieties).where(grape_varieties: { id: params[:grape_variety] }) if params[:grape_variety].present?
-    @wineries = @wineries.joins(:wine_styles).where(wine_styles: { id: params[:wine_style] }) if params[:wine_style].present?
-    @wineries = @wineries.joins(:awards).where(awards: { id: params[:award] }) if params[:award].present?
-    @wineries = @wineries.joins(:experiences).where(experiences: { id: params[:experience] }) if params[:experience].present?
-    @wineries = @wineries.joins(:dinings).where(dinings: { id: params[:dining] }) if params[:dining].present?
+  # Initialize query scope
+  query = @wineries
 
-    # active_hash filters (simple fields)
-    @wineries = @wineries.where(wine_region_id: params[:wine_region]) if params[:wine_region].present?
-    @wineries = @wineries.where(tasting_type_id: params[:tasting_type]) if params[:tasting_type].present?
-    @wineries = @wineries.where(winery_type_id: params[:winery_type]) if params[:winery_type].present?
-    
-    # Apply pagination *after* all filters
-    @wineries = @wineries.page(params[:page]).per(10)
-  end
+  # Many-to-many filters
+  query = query.joins(:grape_varieties).where(grape_varieties: { id: params[:grape_variety] }) if params[:grape_variety].present?
+  query = query.joins(:wine_styles).where(wine_styles: { id: params[:wine_style] }) if params[:wine_style].present?
+  query = query.joins(:awards).where(awards: { id: params[:award] }) if params[:award].present?
+  query = query.joins(:experiences).where(experiences: { id: params[:experience] }) if params[:experience].present?
+  query = query.joins(:dinings).where(dinings: { id: params[:dining] }) if params[:dining].present?
+
+  # ActiveHash-style filters
+  query = query.where(wine_region_id: params[:wine_region]) if params[:wine_region].present?
+  query = query.where(tasting_type_id: params[:tasting_type]) if params[:tasting_type].present?
+  query = query.where(winery_type_id: params[:winery_type]) if params[:winery_type].present?
+
+  # Apply distinct in case of multiple joins to prevent duplicate rows
+  @wineries = query.distinct.page(params[:page]).per(10)
+end
  
   # Show action: displays the detailed page for a specific winery
   def show
