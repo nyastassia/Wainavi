@@ -1,0 +1,67 @@
+<main class="winery-detail-page">
+  <div class="winery-show">
+    <section class="winery-header">
+      <h1><%= @winery.title.presence || "名称未設定" %></h1>
+      <% if @winery.images.attached? %>
+        <div class="winery-images">
+          <% @winery.images.each do |image| %>
+            <%= image_tag image.variant(resize_to_limit: [800, 600]), class: "winery-photo" %>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
+
+    <section class="winery-info">
+      <p><strong>地域:</strong> <%= @winery.wine_region&.name || "未設定" %></p>
+      <p><strong>ワイナリーのタイプ:</strong> <%= @winery.winery_type&.name || "未設定" %></p>
+      <p><strong>試飲:</strong> <%= @winery.tasting_type&.name || "未設定" %></p>
+
+      <p><strong>ブドウの品種:</strong>
+        <%= @winery.grape_varieties.any? ? @winery.grape_varieties.map(&:name).join(" / ") : "情報なし" %>
+      </p>
+
+      <p><strong>ワインの種類:</strong>
+        <%= @winery.wine_styles.any? ? @winery.wine_styles.map(&:name).join(" / ") : "情報なし" %>
+      </p>
+
+      <p><strong>受賞歴:</strong>
+        <%= @winery.awards.any? ? @winery.awards.map(&:name).join(" / ") : "情報なし" %>
+      </p>
+
+      <p><strong>食事:</strong>
+        <%= @winery.dinings.any? ? @winery.dinings.map(&:name).join(" / ") : "情報なし" %>
+      </p>
+
+      <p><strong>体験:</strong>
+        <%= @winery.experiences.any? ? @winery.experiences.map(&:name).join(" / ") : "情報なし" %>
+      </p>
+
+      <p><strong>営業時間:</strong> <%= @winery.open_days_and_time.presence || "未設定" %></p>
+      <p><strong>住所:</strong> <%= @winery.address.presence || "未設定" %></p>
+      <p><strong>電話:</strong> <%= @winery.phone.presence || "未設定" %></p>
+
+      <p><strong>Webサイト:</strong>
+        <% if @winery.website.present? %>
+          <%= link_to @winery.website, @winery.website, target: "_blank", rel: "noopener" %>
+        <% else %>
+          未設定
+        <% end %>
+      </p>
+
+      <% if @winery.map.present? %>
+        <p><strong>地図:</strong> <%= link_to "Google Mapを見る", @winery.map, target: "_blank", rel: "noopener" %></p>
+      <% end %>
+
+      <% if @winery.description.present? %>
+        <div class="winery-description">
+          <h2>ワイナリーの紹介</h2>
+          <p><%= simple_format(@winery.description) %></p>
+        </div>
+      <% end %>
+    </section>
+
+    <div class="back-link">
+      <%= link_to "トップページへ戻る", root_path, class: "back-button" %>
+    </div>
+  </div>
+</main>
