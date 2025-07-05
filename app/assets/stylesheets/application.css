@@ -19,6 +19,15 @@ body {
   font-family: 'Playfair Display', serif;
 }
 
+.site-title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.site-title-link:hover {
+  opacity: 0.8;
+}
+
 /* Hero section */
 .hero {
   display: flex;
