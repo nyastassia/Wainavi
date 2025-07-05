@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_03_125320) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_05_063944) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -122,7 +122,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_03_125320) do
     t.string "title", null: false
     t.text "open_days_and_time"
     t.integer "wine_region_id", null: false
-    t.integer "tasting_id"
+    t.integer "tasting_type_id"
     t.integer "winery_type_id"
     t.string "facilities"
     t.text "description"

@@ -6,7 +6,7 @@ class Winery < ApplicationRecord
   # ActiveHash
   belongs_to_active_hash :wine_region
   belongs_to_active_hash :winery_type
-  belongs_to_active_hash :tasting_type, class_name: "TastingType", foreign_key: "tasting_id"
+  belongs_to_active_hash :tasting_type, class_name: "TastingType", foreign_key: "tasting_type_id"
 
   # Associations for grape varieties
   has_many :grape_variety_wineries
