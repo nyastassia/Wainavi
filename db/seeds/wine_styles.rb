@@ -1,5 +1,6 @@
-⚪️ ワインスタイル（Wine Styles）
+# ワインスタイル (Wine Styles)
 
+WineStyle.delete_all
 WineStyle.find_or_create_by!(name: "スパークリング")   # Sparkling
 WineStyle.find_or_create_by!(name: "白ワイン（辛口）") # White (Dry)
 WineStyle.find_or_create_by!(name: "白ワイン（甘口）") # White (Sweet)
