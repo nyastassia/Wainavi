@@ -1,11 +1,14 @@
 # ワインスタイル (Wine Styles)
 
-WineStyle.delete_all
-WineStyle.find_or_create_by!(name: "スパークリング")   # Sparkling
-WineStyle.find_or_create_by!(name: "白ワイン（辛口）") # White (Dry)
-WineStyle.find_or_create_by!(name: "白ワイン（甘口）") # White (Sweet)
-WineStyle.find_or_create_by!(name: "ロゼ")             # Rosé
-WineStyle.find_or_create_by!(name: "赤ワイン（ライトボディ）") # Red (Light body)
-WineStyle.find_or_create_by!(name: "赤ワイン（フルボディ）")   # Red (Full body)
-WineStyle.find_or_create_by!(name: "デザートワイン")   # Dessert wine
-WineStyle.find_or_create_by!(name: "オレンジワイン")   # Orange wine
+[
+  "スパークリング", # Sparkling
+  "白ワイン（辛口）", # White (Dry)
+  "白ワイン（甘口）", # White (Sweet)
+  "ロゼ", # Rosé
+  "赤ワイン（ライトボディ）", # Red (Light body)
+  "赤ワイン（フルボディ）", # Red (Full-body)
+  "デザートワイン", # Dessert wine
+  "オレンジワイン" # Orange wine
+].each do |name|
+  WineStyle.find_or_create_by!(name: name)
+end
