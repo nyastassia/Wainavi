@@ -1,5 +1,5 @@
 # db/seeds/wineries.rb
-winery1 = Winery.find_or_create_by!(title: "あいざわ農園").tap do |w|
+winery1 = Winery.find_or_initialize_by(title: "あいざわ農園").tap do |w|
   w.assign_attributes(
     open_days_and_time: "情報なし",
     wine_region_id: 1,
@@ -19,7 +19,7 @@ winery1 = Winery.find_or_create_by!(title: "あいざわ農園").tap do |w|
 end
 
 
-winery2 = Winery.find_or_create_by!(title: "OSA WINERY（オサワイナリー）").tap do |w|
+winery2 = Winery.find_or_initialize_by(title: "OSA WINERY（オサワイナリー）").tap do |w|
   w.assign_attributes(
     open_days_and_time: "毎週土曜日 13:00～17:00（収穫期は休業）",
     wine_region_id: 1,
@@ -38,7 +38,7 @@ winery2 = Winery.find_or_create_by!(title: "OSA WINERY（オサワイナリー�
   w.save! if w.changed? || w.new_record?
 end
 
-winery3 = Winery.find_or_create_by!(title: "丸藤葡萄酒工業(株)").tap do |w|
+winery3 = Winery.find_or_initialize_by(title: "丸藤葡萄酒工業(株)").tap do |w|
   w.assign_attributes(
    open_days_and_time: "無休（年末年始除く）9:00～16:30",
    wine_region_id: 19,
