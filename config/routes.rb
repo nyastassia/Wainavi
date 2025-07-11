@@ -9,8 +9,13 @@ Rails.application.routes.draw do
   unlocks: 'users/unlocks'
 }
   root 'wineries#index'
-  
-  resources :wineries, only: [:index, :show]
+
+  resources :wineries, only: [:index, :show] do
+    resource :saved_winery, only: [:create, :destroy]
+  end
+  get '/my_wineries', to: 'users#favorites'
+
   get "up" => "rails/health#show", as: :rails_health_check
 
 end
+
