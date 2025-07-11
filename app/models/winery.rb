@@ -28,6 +28,10 @@ class Winery < ApplicationRecord
   has_many :dining_wineries
   has_many :dinings, through: :dining_wineries
 
+  #Associations for saved wineries
+  has_many :saved_wineries
+  has_many :saved_by_users, through: :saved_wineries, source: :user
+
   # Active Storage for multiple images
   has_many_attached :images
 end

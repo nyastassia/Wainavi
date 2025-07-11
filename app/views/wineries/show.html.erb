@@ -12,6 +12,15 @@
     </section>
 
     <section class="winery-info">
+       <% if user_signed_in? %>
+       <% if current_user.saved_wineries.exists?(winery: @winery) %>
+       <%= button_to '★ 保存済み', winery_saved_winery_path(@winery), method: :delete, class: 'button-white' %>
+       <% else %>
+       <%= button_to '♡ 保存', winery_saved_winery_path(@winery), method: :post, class: 'button-white' %>
+       <% end %>
+       <% else %>
+       <%= link_to '♡ ログインして保存', new_user_session_path, class: "login-save-button" %>
+       <% end %>
       <p><strong>地域:</strong> <%= @winery.wine_region&.name || "未設定" %></p>
       <p><strong>ワイナリーのタイプ:</strong> <%= @winery.winery_type&.name || "未設定" %></p>
       <p><strong>試飲:</strong> <%= @winery.tasting_type&.name || "未設定" %></p>

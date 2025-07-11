@@ -1,0 +1,28 @@
+<div class="user-profile-container">
+<h1><%= @user.username.presence || @user.email %> さんのマイページ</h1>
+
+<section class="user-info">
+  <p><strong>メールアドレス:</strong> <%= @user.email %></p>
+  <p><strong>ユーザー名:</strong> <%= @user.username || "未設定" %></p>
+</section>
+
+<hr>
+
+<h2>お気に入りのワイナリー</h2>
+
+<% if @wineries.any? %>
+  <div class="wineries-grid">
+    <% @wineries.each do |winery| %>
+      <article class="winery-card">
+        <h3><%= link_to winery.title, winery_path(winery) %></h3>
+        <p><strong>地域:</strong> <%= winery.wine_region&.name %></p>
+        <p><strong>ブドウの品種:</strong> <%= winery.grape_varieties.map(&:name).join(", ") %></p>
+        <p><strong>ワインの種類:</strong> <%= winery.wine_styles.map(&:name).join(", ") %></p>
+        <%= button_to '★ 削除', winery_saved_winery_path(winery), method: :delete, class: 'button-white' %>
+      </article>
+    <% end %>
+  </div>
+<% else %>
+  <p>まだお気に入りのワイナリーがありません。</p>
+<% end %>
+</div>

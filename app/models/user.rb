@@ -6,5 +6,5 @@ class User < ApplicationRecord
 
 has_many :comments
 has_many :saved_wineries
-has_many :wineries, through: :saved_wineries
+has_many :saved_wineries_list, through: :saved_wineries, source: :winery
 end
