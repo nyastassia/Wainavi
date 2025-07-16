@@ -1,0 +1,17 @@
+<h2>コメントを編集</h2>
+
+<%= form_with model: [@winery, @comment], local: true do |f| %>
+  <div>
+    <%= f.label :rating, "評価 (1〜5)" %>
+    <%= f.select :rating, options_for_select(1..5, @comment.rating), {}, class: "form-select" %>
+  </div>
+
+  <div>
+    <%= f.label :text, "コメント" %>
+    <%= f.text_area :text, class: "form-control" %>
+  </div>
+
+  <%= f.submit "更新する", class: "btn btn-primary mt-2" %>
+<% end %>
+
+<%= link_to "戻る", winery_path(@winery), class: "btn btn-outline-secondary mt-2" %>

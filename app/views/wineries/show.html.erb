@@ -2,6 +2,7 @@
   <div class="winery-show">
     <section class="winery-header">
       <h1><%= @winery.title.presence || "名称未設定" %></h1>
+       <p><strong>平均評価: <%= @winery.average_rating %> ★</strong></p>
       <% if @winery.images.attached? %>
         <div class="winery-images">
           <% @winery.images.each do |image| %>
@@ -21,6 +22,7 @@
        <% else %>
        <%= link_to '♡ ログインして保存', new_user_session_path, class: "login-save-button" %>
        <% end %>
+      <p>平均評価: <%= @winery.average_rating %> ★</p>
       <p><strong>地域:</strong> <%= @winery.wine_region&.name || "未設定" %></p>
       <p><strong>ワイナリーのタイプ:</strong> <%= @winery.winery_type&.name || "未設定" %></p>
       <p><strong>試飲:</strong> <%= @winery.tasting_type&.name || "未設定" %></p>
@@ -72,5 +74,38 @@
     <div class="back-link">
       <%= link_to "トップページへ戻る", root_path, class: "back-button" %>
     </div>
+    <h3>レビューとコメント</h3>
+
+<% if user_signed_in? %>
+  <%= form_with model: [@winery, Comment.new], local: true do |f| %>
+    <div>
+      <%= f.label :rating, "評価 (1〜5)" %>
+      <%= f.select :rating, options_for_select(1..5), {}, class: "form-select" %>
+    </div>
+    <div>
+      <%= f.label :text, "コメント" %>
+      <%= f.text_area :text, class: "form-control" %>
+    </div>
+    <%= f.submit "投稿する", class: "back-button" %>
+  <% end %>
+<% else %>
+  <p>コメントするにはログインが必要です。</p>
+<% end %>
+
+<% @winery.comments.order(created_at: :desc).each do |comment| %>
+  <div class="border p-2 mt-2">
+    <strong><%= comment.user.email %></strong>
+   （<%= '★' * comment.rating.to_i %><%= '☆' * (5 - comment.rating.to_i) %>）<br>
+    <%= simple_format(comment.text) %>
+    <% if comment.user == current_user %>
+          <div class="mt-1">
+        <%= link_to '編集', edit_winery_comment_path(@winery, comment), class: "btn btn-outline-primary btn-sm" %>
+        <%= button_to '削除', [@winery, comment], method: :delete,
+              data: { confirm: '本当に削除しますか？' },
+              class: "button-white" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
   </div>
 </main>

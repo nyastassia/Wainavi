@@ -79,10 +79,12 @@
 
 <section class="wineries-grid">
   <% @wineries.compact.each do |winery| %>
+  <% next if winery.nil? %>
     <article class="winery-card">
       <h2>
         <%= link_to (winery.title.presence || "名称未設定"), winery_path(winery) %>
       </h2>
+      <p>平均評価: <%= winery.average_rating %> ★</p>
        <% if user_signed_in? %>
        <% if current_user.saved_wineries.exists?(winery: winery) %>
        <%= button_to '★ 保存済み', winery_saved_winery_path(winery), method: :delete, class: 'button-white' %>

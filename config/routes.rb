@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :wineries, only: [:index, :show] do
     resource :saved_winery, only: [:create, :destroy]
+    resources :comments, only: [:create, :edit, :update, :destroy] 
   end
   get '/my_wineries', to: 'users#favorites'
 

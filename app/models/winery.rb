@@ -34,4 +34,11 @@ class Winery < ApplicationRecord
 
   # Active Storage for multiple images
   has_many_attached :images
+
+  # Associations for comments
+  has_many :comments, dependent: :destroy
+
+  def average_rating
+  comments.where.not(rating: nil).average(:rating)&.round(1) || 0
+  end
 end
